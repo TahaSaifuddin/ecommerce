@@ -5,12 +5,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 interface ProductProps {
+  id: string;
   name: string;
   price: number;
   images: string[]; // Array of image URLs
 }
 
-const ProductCard: React.FC<ProductProps> = ({ name, price, images }) => {
+const ProductCard: React.FC<ProductProps> = ({ id, name, price, images }) => {
   // Use the first image as the thumbnail, or fallback to a placeholder
   const thumbnail = images.length > 0 ? images[0] : '/images/placeholder.png';
 
@@ -34,20 +35,11 @@ const ProductCard: React.FC<ProductProps> = ({ name, price, images }) => {
       <p className="text-center text-lg font-medium text-gray-600">Rs. {price}</p>
 
       {/* View Details Button */}
-      <Link
-        href={{
-          pathname: '/shopProduct',
-          query: {
-            name,
-            price,
-            images: JSON.stringify(images), // Pass all images as a query parameter
-          },
-        }}
-      >
-        <button className="bg-white text-black border border-black px-4 py-2 rounded-lg mt-4 hover:bg-gray-100">
-          View Details
-        </button>
-      </Link>
+      <Link href={`/shop/${id}`}>  
+  <button className="w-full bg-white text-black border border-black px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+    View Details
+  </button>
+</Link>
     </div>
   );
 };

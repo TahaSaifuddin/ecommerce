@@ -87,6 +87,7 @@ const Shop = () => {
             {products.map((product) => (
               <ProductCard
                 key={product._id}
+                id={product._id}
                 name={product.name}
                 price={product.price}
                 images={product.images && product.images.length > 0 ? product.images : ['/images/placeholder.png']}

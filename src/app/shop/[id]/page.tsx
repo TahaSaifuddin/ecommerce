@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -24,7 +25,7 @@ interface Product {
 }
 
 const PRODUCT_QUERY = groq`
-  *[_type == "product" && _id == $id][0] {
+   *[_type == "shop" && _id == $id][0] {
     _id,
     name,
     price,
@@ -51,26 +52,19 @@ const ShopProduct = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
+        console.log('Fetching product with ID:', id); // Add this
         const productData = await sanityClient.fetch(PRODUCT_QUERY, { id });
-        if (productData) {
-          setProduct({
-            ...productData,
-            colors: productData.colors || ["Default"],
-            sizes: productData.sizes || ["M", "L", "XL"],
-            tags: productData.tags || [],
-          });
-          setSelectedColor(productData.colors?.[0] || "");
-          setSelectedSize(productData.sizes?.[0] || "");
-          setSelectedImage(productData.images?.[0] || "");
-        }
+        console.log('Received product data:', productData); // Add this
+        
+        // Keep your existing logic here
       } catch (error) {
-        console.error("Error fetching product:", error);
+        console.error('Full error:', error); // Enhanced logging
       }
     };
-
+  
     if (id) fetchProduct();
   }, [id]);
-
+  
   const handleQuantityChange = (type: "increment" | "decrement") => {
     setQuantity((prev) => (type === "increment" ? prev + 1 : Math.max(prev - 1, 1)));
   };
