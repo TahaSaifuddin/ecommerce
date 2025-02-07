@@ -5,11 +5,11 @@ import imageUrlBuilder from "@sanity/image-url";
 
 
 export const sanityClient = createClient({
-  projectId:'efklgk0j',
-  dataset:'production',
+  projectId:process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  dataset:process.env.NEXT_PUBLIC_SANITY_DATASET,
   apiVersion:'2025-01-22',
   useCdn: false, // Set to false if statically generating pages, using ISR or tag-based revalidation
-  token:'sk7Rt2CmKlo8OTWvzJR6d0T1pdiyrvG4TpjFnRHxLZitpk0lMQyp75qWE4Y2gz0I1KLMjr2MHWI8cDgfpAoUcHeS7Z3JWLEquZnwbV9XG0k7uO7DgA0AeNw3iHR0SLPofdE9iElhcLyAMQUDKeuMJbra4o4UmDppl6FQ9PdnCnFusVg9l9IE',
+  token:process.env.SANITY_API_TOKEN,
 })
 
 const builder = imageUrlBuilder(sanityClient);
